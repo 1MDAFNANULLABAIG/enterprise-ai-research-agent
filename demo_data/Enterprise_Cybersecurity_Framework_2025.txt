@@ -1,0 +1,28 @@
+GLOBAL ENTERPRISE CYBERSECURITY & AI GOVERNANCE FRAMEWORK
+Document Code: POL-SEC-2025-V4
+Effective Date: January 1, 2025
+Target Audience: Security Operations, Engineering, Compliance, Data Privacy Teams
+
+CHAPTER 1: SCOPE AND OBJECTIVE
+This framework establishes mandatory security baselines, threat mitigations, and compliance standards across all cloud infrastructure, data pipelines, and Large Language Model (LLM) agent deployments. The primary objective is to guarantee end-to-end zero-trust architecture, tenant data isolation, and defensibility against emerging AI-native threat vectors.
+
+CHAPTER 2: IDENTITY AND ACCESS MANAGEMENT (IAM)
+2.1 Authentication Protocols: All enterprise user and service accounts must enforce Multi-Factor Authentication (MFA) utilizing FIDO2 WebAuthn hardware tokens or time-based one-time password (TOTP). Passwords must adhere to NIST SP 800-63B standards and require cryptographic hashing using Argon2id or bcrypt with minimum work factor 12.
+2.2 Role-Based Access Control (RBAC): The principle of least privilege applies to all systems. Roles must be strictly compartmentalized into Admin, Analyst, Auditor, and Standard User. Cross-tenant permission inheritance is strictly prohibited.
+2.3 Token Security: API session tokens must be issued as JSON Web Tokens (JWT) signed with asymmetric RS256 or HMAC-SHA256 with minimum 256-bit entropy. Access token TTL is strictly capped at 60 minutes, and refresh tokens expire in 7 days with mandatory rotation on each issuance.
+
+CHAPTER 3: DATA ENCRYPTION AND STORAGE HYGIENE
+3.1 Data in Transit: All inbound and inter-service communications must enforce TLS 1.3 with forward secrecy ciphers (e.g., ECDHE-RSA-AES256-GCM-SHA384). Legacy TLS 1.0, 1.1, and 1.2 with CBC mode ciphers are disabled globally.
+3.2 Data at Rest: All persistent volumes, document storage objects (AWS S3), vector databases (Qdrant), and relational tables (PostgreSQL) must enforce AES-256 encryption managed via AWS KMS or enterprise HSMs.
+3.3 Document Redaction & PII Masking: Prior to chunking and vector embedding, document ingestion pipelines must execute automated Named Entity Recognition (NER) to detect and redact Social Security Numbers, credit card details, and personal health identifiers unless explicit tenant compliance exemption applies.
+
+CHAPTER 4: AI & LLM AGENT SAFETY CONTROLS
+4.1 Prompt Injection Defenses: Ingestion pipelines must sanitize untrusted text extracted from uploaded PDFs, DOCX, and CSV files. Prompt boundaries must employ XML/delimiter encapsulations and defensive system instructions forbidding indirect instruction override.
+4.2 Vector Database Multi-Tenancy: All vector retrieval queries must enforce tenant-level and user-level metadata filters at the database engine level (e.g., Qdrant payload filter `user_id == current_user_id`). Vector embeddings must never be queried across tenant boundaries.
+4.3 Tool Execution Sandboxing: AI agents executing tools must run in deterministic, sandboxed runtimes. Arbitrary shell access, arbitrary python execution, and raw OS syscalls are forbidden. Permitted tools are restricted to structured document search, mathematical calculation, parameterized CSV queries, and controlled external search.
+4.4 Hallucination Mitigation & Citation Guardrails: RAG responses must be anchored directly in retrieved evidence chunks. When the confidence score or semantic similarity falls below 0.72, the agent must output a standardized refusal acknowledging lack of verifiable document evidence.
+
+CHAPTER 5: INCIDENT RESPONSE & AUDIT LOGGING
+5.1 Audit Trail Mandate: Every authentication event, document upload, chunk extraction, vector search query, and agent tool execution must produce an immutable audit log record containing timestamp (ISO-8601), user ID, IP address, request ID, and execution status.
+5.2 Retention Policy: Audit logs must be retained for a minimum of 365 days in write-once-read-many (WORM) compliant S3 Glacier vaults.
+5.3 Breach Escalation: Any confirmed unauthorized access or cross-tenant data leakage must be escalated to the Chief Information Security Officer (CISO) and legal counsel within 1 hour of detection.

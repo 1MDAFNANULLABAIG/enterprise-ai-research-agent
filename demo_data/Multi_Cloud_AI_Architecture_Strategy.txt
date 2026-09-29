@@ -1,0 +1,36 @@
+ENTERPRISE MULTI-CLOUD AI ARCHITECTURE & SCALING BLUEPRINT
+Document Reference: ARCH-AI-2025-08
+Author: Principal Systems Architect, AI Platform Group
+Status: Approved for Production
+
+1. EXECUTIVE SUMMARY
+As enterprise AI workloads transition from experimental prototypes to mission-critical business automation, architectures must evolve to provide high resilience, sub-second query latency, linear horizontal scalability, and cloud-provider portability. This blueprint defines the reference architecture for the Enterprise AI Research & Document Agent platform across AWS, Azure, and private on-premises Kubernetes clusters.
+
+2. SYSTEM TOPOLOGY & COMPONENT DECOMPOSITION
+The platform is decoupled into five distinct tiers:
+2.1 Edge & Presentation Layer: CloudFront CDN terminating TLS 1.3, routing static Single-Page Application (SPA) assets from Amazon S3 buckets, and proxying API traffic to an Application Load Balancer (ALB).
+2.2 Application Gateway & API Service: FastAPI asynchronous microservice running on AWS ECS Fargate or EKS containers. Implements OAuth2/JWT authentication, rate limiting, request validation, and Server-Sent Events (SSE) streaming for real-time generative responses.
+2.3 Orchestration & Agent Runtime: LangGraph / ReAct agent coordinator executing deterministic multi-step research plans. Coordinates tool selection across document retrieval, formula calculation, and structured CSV analysis.
+2.4 Retrieval-Augmented Generation (RAG) Engine:
+   - Chunking Engine: Recursive semantic character splitter with dynamic windowing (target: 600 tokens, 100 token overlap).
+   - Embedding Layer: Modular embedding adapter supporting local FastEmbed (BAAI/bge-small-en-v1.5) with 384 dimensions, OpenAI text-embedding-3-small (1536 dimensions), or Google text-embedding-004 (768 dimensions).
+   - Vector Storage Engine: Distributed Qdrant cluster with HNSW (Hierarchical Navigable Small World) graph indexing and scalar quantization, achieving sub-25ms retrieval latency on 10M+ chunk vectors.
+   - Reranking Pipeline: Cross-encoder reranker refining top-50 vector candidates to top-5 high-relevance context passages.
+2.5 Asynchronous Processing & Cache Tier:
+   - Redis cluster: Provides semantic response caching, distributed rate limiting, and message brokering for Celery task workers.
+   - Celery Workers: Dedicated document extraction workers processing asynchronous ingestion, OCR parsing, and chunk generation without blocking client HTTP threads.
+   - Relational Database: PostgreSQL 16 on Amazon RDS with multi-AZ replication storing user accounts, document metadata, audit logs, and conversation history.
+
+3. RESILIENCE, SLA & PERFORMANCE TARGETS
+- P95 Vector Retrieval Latency: < 45 milliseconds across 5 million active chunks.
+- P95 End-to-End First-Token Streaming Latency: < 750 milliseconds using fast streaming LLMs.
+- Document Ingestion Throughput: > 120 pages per minute per worker node.
+- Availability SLA: 99.95% uptime with active-passive multi-region failover.
+- Recovery Time Objective (RTO): < 15 minutes.
+- Recovery Point Objective (RPO): < 1 minute via streaming WAL replication.
+
+4. COST OPTIMIZATION AND GPU INFERENCE GOVERNANCE
+To mitigate exorbitant cloud AI expenditures, the platform implements three optimization mechanisms:
+4.1 Exact & Semantic Query Caching: Frequent queries matching semantic embeddings with similarity > 0.96 are served directly from Redis cache, slashing LLM API invocation costs by up to 42%.
+4.2 Hybrid Embeddings: Utilizing lightweight local embedding models for initial ingestion reduces reliance on metered third-party embedding APIs.
+4.3 Dynamic Context Pruning: Redundant and repetitive chunks are filtered out prior to prompt assembly, minimizing prompt token consumption.

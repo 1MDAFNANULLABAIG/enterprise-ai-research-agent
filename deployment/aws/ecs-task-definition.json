@@ -1,0 +1,38 @@
+{
+  "family": "enterprise-ai-research-agent",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "containerDefinitions": [
+    {
+      "name": "fastapi-backend",
+      "image": "REPLACE_WITH_ECR_URI/enterprise-ai-backend:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "ENVIRONMENT", "value": "production" },
+        { "name": "USE_REDIS_CACHE", "value": "True" },
+        { "name": "DEFAULT_LLM_PROVIDER", "value": "gemini" }
+      ],
+      "secrets": [
+        { "name": "DATABASE_URL", "valueFrom": "arn:aws:secretsmanager:us-east-1:123456789012:secret:db_url" },
+        { "name": "SECRET_KEY", "valueFrom": "arn:aws:secretsmanager:us-east-1:123456789012:secret:jwt_secret" },
+        { "name": "GEMINI_API_KEY", "valueFrom": "arn:aws:secretsmanager:us-east-1:123456789012:secret:gemini_key" }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/enterprise-ai-backend",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "backend"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+# =============================================================================
+# Git Ignore Configuration - Enterprise AI Research & Document Agent
+# =============================================================================
+
+# --- Environment Variables & Secrets (CRITICAL) ---
+.env
+.env.*
+*.env
+!*.env.example
+!.env.example
+secrets.json
+credentials.json
+*.pem
+*.key
+
+# --- Python & Virtual Environments ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment Folders
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Unit Tests & Coverage ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# --- Database & Local Storage Files ---
+*.db
+*.sqlite
+*.sqlite3
+backend/enterprise_agent.db
+backend/test_enterprise.db
+test_enterprise.db
+
+# Storage / Uploaded documents (keep directory, ignore uploaded tenant files)
+backend/storage/uploads/*
+!backend/storage/uploads/.gitkeep
+storage/uploads/*
+!storage/uploads/.gitkeep
+
+# --- Node & Frontend Build Artifacts ---
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Vite / React build outputs
+frontend/dist/
+frontend/dist-ssr/
+frontend/.vite/
+
+# --- Celery & Redis Task Artifacts ---
+celerybeat-schedule
+celerybeat.pid
+
+# --- Logs & Runtime Data ---
+*.log
+logs/
+*.pid
+*.seed
+
+# --- Editor & IDE Files ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# --- Operating System Files ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini

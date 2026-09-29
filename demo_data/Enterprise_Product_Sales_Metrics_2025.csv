@@ -1,0 +1,28 @@
+product_id,product_name,category,region,quarter,revenue_usd,units_sold,avg_deal_size_usd,customer_satisfaction_score,churn_rate_pct
+PROD-001,Cognitive Document Agent,Enterprise AI,North America,Q1,12400000,310,40000,9.4,1.8
+PROD-001,Cognitive Document Agent,Enterprise AI,North America,Q2,15800000,395,40000,9.5,1.5
+PROD-001,Cognitive Document Agent,Enterprise AI,North America,Q3,19200000,480,40000,9.7,1.2
+PROD-001,Cognitive Document Agent,Enterprise AI,EMEA,Q1,6200000,155,40000,9.1,2.1
+PROD-001,Cognitive Document Agent,Enterprise AI,EMEA,Q2,8100000,202,40099,9.3,1.9
+PROD-001,Cognitive Document Agent,Enterprise AI,EMEA,Q3,10800000,270,40000,9.4,1.6
+PROD-001,Cognitive Document Agent,Enterprise AI,APAC,Q1,3100000,77,40259,8.9,2.4
+PROD-001,Cognitive Document Agent,Enterprise AI,APAC,Q2,4400000,110,40000,9.0,2.2
+PROD-001,Cognitive Document Agent,Enterprise AI,APAC,Q3,5900000,147,40136,9.2,1.8
+PROD-002,Semantic Vector Hub,Cloud Infrastructure,North America,Q1,8900000,445,20000,9.2,2.0
+PROD-002,Semantic Vector Hub,Cloud Infrastructure,North America,Q2,10200000,510,20000,9.3,1.8
+PROD-002,Semantic Vector Hub,Cloud Infrastructure,North America,Q3,12100000,605,20000,9.4,1.5
+PROD-002,Semantic Vector Hub,Cloud Infrastructure,EMEA,Q1,4500000,225,20000,9.0,2.3
+PROD-002,Semantic Vector Hub,Cloud Infrastructure,EMEA,Q2,5300000,265,20000,9.1,2.1
+PROD-002,Semantic Vector Hub,Cloud Infrastructure,EMEA,Q3,6400000,320,20000,9.3,1.9
+PROD-002,Semantic Vector Hub,Cloud Infrastructure,APAC,Q1,2200000,110,20000,8.8,2.7
+PROD-002,Semantic Vector Hub,Cloud Infrastructure,APAC,Q2,2800000,140,20000,8.9,2.5
+PROD-002,Semantic Vector Hub,Cloud Infrastructure,APAC,Q3,3500000,175,20000,9.1,2.1
+PROD-003,Agent Guardrail Sentry,Security & Governance,North America,Q1,4200000,280,15000,9.5,1.2
+PROD-003,Agent Guardrail Sentry,Security & Governance,North America,Q2,5800000,386,15025,9.6,1.0
+PROD-003,Agent Guardrail Sentry,Security & Governance,North America,Q3,7900000,526,15019,9.8,0.8
+PROD-003,Agent Guardrail Sentry,Security & Governance,EMEA,Q1,2100000,140,15000,9.2,1.6
+PROD-003,Agent Guardrail Sentry,Security & Governance,EMEA,Q2,3100000,206,15048,9.4,1.3
+PROD-003,Agent Guardrail Sentry,Security & Governance,EMEA,Q3,4400000,293,15017,9.5,1.1
+PROD-003,Agent Guardrail Sentry,Security & Governance,APAC,Q1,1100000,73,15068,9.0,2.0
+PROD-003,Agent Guardrail Sentry,Security & Governance,APAC,Q2,1600000,106,15094,9.2,1.7
+PROD-003,Agent Guardrail Sentry,Security & Governance,APAC,Q3,2200000,146,15068,9.3,1.4

@@ -1,0 +1,5 @@
+ENTERPRISE SERVICE LEVEL AGREEMENT 2025
+Section 1: Uptime Commitment
+ACME guarantees 99.99% monthly uptime for mission critical services.
+Section 2: Response Times
+Severity 1 incidents require response within 15 minutes.

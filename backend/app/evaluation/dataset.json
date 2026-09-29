@@ -1,0 +1,42 @@
+[
+  {
+    "id": "eval-001",
+    "question": "What was ACME Corporation's total consolidated revenue in Q3 2025 and its growth percentage?",
+    "ground_truth_answer": "$142.8 million, representing a 28.4% year-over-year increase compared to $111.2 million in Q3 2024.",
+    "expected_document": "ACME_Corp_Q3_2025_Financial_Report.txt",
+    "expected_page": 1,
+    "expected_keywords": ["142.8 million", "28.4%", "111.2 million", "revenue"]
+  },
+  {
+    "id": "eval-002",
+    "question": "What authentication standards are mandated for user and service accounts in the cybersecurity framework?",
+    "ground_truth_answer": "Multi-Factor Authentication (MFA) with FIDO2 WebAuthn hardware tokens or TOTP, NIST SP 800-63B password standards, and Argon2id or bcrypt hashing.",
+    "expected_document": "Enterprise_Cybersecurity_Framework_2025.txt",
+    "expected_page": 1,
+    "expected_keywords": ["MFA", "FIDO2", "TOTP", "NIST", "bcrypt"]
+  },
+  {
+    "id": "eval-003",
+    "question": "What is the P95 latency target for vector retrieval and end-to-end streaming in the multi-cloud architecture?",
+    "ground_truth_answer": "P95 vector retrieval latency < 45 milliseconds across 5 million chunks, and P95 first-token streaming latency < 750 milliseconds.",
+    "expected_document": "Multi_Cloud_AI_Architecture_Strategy.txt",
+    "expected_page": 1,
+    "expected_keywords": ["45 milliseconds", "750 milliseconds", "P95", "retrieval"]
+  },
+  {
+    "id": "eval-004",
+    "question": "What is the maximum token TTL and refresh token rotation requirement?",
+    "ground_truth_answer": "Access token TTL is capped at 60 minutes and refresh tokens expire in 7 days with mandatory rotation.",
+    "expected_document": "Enterprise_Cybersecurity_Framework_2025.txt",
+    "expected_page": 1,
+    "expected_keywords": ["60 minutes", "7 days", "rotation", "TTL"]
+  },
+  {
+    "id": "eval-005",
+    "question": "Which business unit had the highest revenue growth in Q3 2025?",
+    "ground_truth_answer": "Enterprise AI Solutions grew 64.5% year-over-year to $68.4 million.",
+    "expected_document": "ACME_Corp_Q3_2025_Financial_Report.txt",
+    "expected_page": 1,
+    "expected_keywords": ["Enterprise AI Solutions", "64.5%", "68.4 million"]
+  }
+]
